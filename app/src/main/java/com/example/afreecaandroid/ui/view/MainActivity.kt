@@ -7,7 +7,9 @@ import com.example.afreecaandroid.R
 import com.example.afreecaandroid.databinding.ActivityMainBinding
 import com.example.afreecaandroid.ui.adapter.ViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

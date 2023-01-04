@@ -1,4 +1,4 @@
-package com.example.afreecaandroid.data.model
+package com.example.afreecaandroid.ui.model
 
 data class TalkCamData(
     val userId: String,

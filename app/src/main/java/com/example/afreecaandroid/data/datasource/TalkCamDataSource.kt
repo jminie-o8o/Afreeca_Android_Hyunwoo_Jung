@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface TalkCamDataSource {
 
-    fun getTalkCamBroadCastList(): Flow<PagingData<TalkCamApiDTO>>
+    fun getTalkCamBroadCastList(): Flow<PagingData<TalkCamApiDTO.Broad>>
 }

@@ -2,6 +2,7 @@ package com.example.afreecaandroid.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
 import com.example.afreecaandroid.R
 import com.example.afreecaandroid.databinding.ActivityMainBinding
 import com.example.afreecaandroid.ui.adapter.ViewPagerAdapter
@@ -13,7 +14,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        bindTabLayoutAtFragment()
     }
 
     private fun bindTabLayoutAtFragment() {

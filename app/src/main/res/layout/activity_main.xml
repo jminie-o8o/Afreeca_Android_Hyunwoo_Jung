@@ -28,11 +28,12 @@
 
                 <TextView
                     android:id="@+id/tv_toolbar"
-                    android:textColor="@color/purple_500"
+                    android:textColor="@color/main"
+                    style="@style/TextHeadline5.22.bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:text="AfreecaTV"
+                    android:text="@string/str_afreeca_tv"
                     tools:text="AfreecaTV" />
 
             </com.google.android.material.appbar.MaterialToolbar>

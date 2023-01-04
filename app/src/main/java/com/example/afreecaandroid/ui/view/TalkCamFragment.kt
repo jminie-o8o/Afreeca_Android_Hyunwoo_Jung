@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.afreecaandroid.R
 import com.example.afreecaandroid.databinding.FragmentTalkCamBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TalkCamFragment : Fragment() {
 
     private var _binding: FragmentTalkCamBinding? = null

@@ -1,7 +1,8 @@
-package com.example.afreecaandroid
+package com.example.afreecaandroid.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.afreecaandroid.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

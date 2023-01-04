@@ -1,4 +1,4 @@
-package com.example.afreecaandroid.ui
+package com.example.afreecaandroid.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

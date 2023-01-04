@@ -1,4 +1,4 @@
-package com.example.afreecaandroid.ui
+package com.example.afreecaandroid.ui.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,17 +8,18 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.afreecaandroid.R
 import com.example.afreecaandroid.databinding.FragmentTalkCamBinding
+import com.example.afreecaandroid.databinding.FragmentTravelBinding
 
-class TalkCamFragment : Fragment() {
+class TravelFragment : Fragment() {
 
-    private var _binding: FragmentTalkCamBinding? = null
+    private var _binding: FragmentTravelBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_talk_cam, container, false)
+    ): View? {
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_travel, container, false)
         return binding.root
     }
 

@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.afreecaandroid.R
 import com.example.afreecaandroid.databinding.FragmentTalkCamBinding
 import com.example.afreecaandroid.databinding.FragmentTalkCamDetailBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class TalkCamDetailFragment : Fragment() {
 
@@ -21,6 +22,16 @@ class TalkCamDetailFragment : Fragment() {
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_talk_cam_detail, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        hideBottomNavigation()
+    }
+
+    private fun hideBottomNavigation() {
+        val bottomNavigation = (activity as MainActivity).findViewById<BottomNavigationView>(R.id.navigation_view)
+        bottomNavigation.visibility = View.GONE
     }
 
     override fun onDestroyView() {

@@ -18,6 +18,7 @@ import com.example.afreecaandroid.ui.adapter.TalkCamPagingAdapter
 import com.example.afreecaandroid.ui.viewmodel.TalkCamViewModel
 import com.example.afreecaandroid.uitl.UiState
 import com.example.afreecaandroid.uitl.collectLatestStateFlow
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,6 +45,7 @@ class TalkCamFragment : Fragment() {
         showListEmptyText()
         getTalkCamData()
         setClickListenerFromAdapter(talkCamPagingAdapter)
+        showBottomNavigation()
     }
 
     private fun setupRecyclerView(talkCamPagingAdapter: TalkCamPagingAdapter) {
@@ -109,6 +111,11 @@ class TalkCamFragment : Fragment() {
             val actions = TalkCamFragmentDirections.actionFragmentTalkCamToFragmentTalkCamDetail(talkCamData)
             findNavController().navigate(actions)
         }
+    }
+
+    private fun showBottomNavigation() {
+        val bottomNavigation = (activity as MainActivity).findViewById<BottomNavigationView>(R.id.navigation_view)
+        bottomNavigation.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {

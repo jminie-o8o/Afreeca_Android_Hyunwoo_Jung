@@ -27,10 +27,15 @@
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
+            style="@style/TextSubtitle1.16.bold"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:text="@{talkCamData.broadTitle}"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_broadcast_thumb_nail"
             app:layout_constraintTop_toTopOf="@+id/iv_broadcast_thumb_nail"
             tools:text="캠방/쿡방 타이틀입니다." />
@@ -47,6 +52,7 @@
 
         <TextView
             android:id="@+id/tv_bj_name"
+            style="@style/TextSubtitle1.14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -57,6 +63,7 @@
 
         <TextView
             android:id="@+id/tv_view_count"
+            style="@style/TextSubtitle1.14"
             setViewer="@{talkCamData.totalViewCount}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

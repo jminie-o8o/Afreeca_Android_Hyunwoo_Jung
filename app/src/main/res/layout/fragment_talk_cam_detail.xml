@@ -17,20 +17,23 @@
 
         <ImageView
             android:id="@+id/iv_detail_bj_profile_image"
+            setProfileImageAtDetail="@{viewModel.talkCamBroadCastDetail}"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginTop="140dp"
-            setProfileImageAtDetail="@{viewModel.talkCamBroadCastDetail}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_detail_broadcast_title"
+            style="@style/TextHeadline5.22.bold"
+            setTitleAtDetail="@{viewModel.talkCamBroadCastDetail}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            setTitleAtDetail="@{viewModel.talkCamBroadCastDetail}"
+            android:ellipsize="end"
+            android:maxLines="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_detail_bj_profile_image"
@@ -38,10 +41,11 @@
 
         <TextView
             android:id="@+id/tv_detail_bj_nickname"
+            style="@style/TextSubtitle1.18"
+            setNickNameAtDetail="@{viewModel.talkCamBroadCastDetail}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            setNickNameAtDetail="@{viewModel.talkCamBroadCastDetail}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_detail_broadcast_title"
@@ -49,10 +53,10 @@
 
         <ImageView
             android:id="@+id/iv_detail_thumb_nail"
+            setThumbnailImageAtDetail="@{viewModel.talkCamBroadCastDetail}"
             android:layout_width="220dp"
             android:layout_height="120dp"
             android:layout_marginTop="50dp"
-            setThumbnailImageAtDetail="@{viewModel.talkCamBroadCastDetail}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_detail_bj_nickname" />

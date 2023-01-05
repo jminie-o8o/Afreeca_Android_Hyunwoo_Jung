@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/fragment_talk_cam"
+        android:title="토크/캠방" />
+
+    <item android:id="@+id/fragment_travel"
+        android:title="여행" />
+
+    <item android:id="@+id/fragment_cook"
+        android:title="먹방/쿡방" />
+</menu>

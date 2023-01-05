@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/talk_cam_nav_graph"
+    app:startDestination="@id/fragment_talk_cam">
+
+    <fragment
+        android:id="@+id/fragment_talk_cam"
+        android:name="com.example.afreecaandroid.ui.view.TalkCamFragment"
+        android:label="TalkCamFragment"
+        tools:layout="@layout/fragment_talk_cam">
+        <action
+            android:id="@+id/action_fragment_talk_cam_to_fragment_talk_cam_detail"
+            app:destination="@id/fragment_talk_cam_detail" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_talk_cam_detail"
+        android:name="com.example.afreecaandroid.ui.view.TalkCamDetailFragment"
+        android:label="TalkCamDetailFragment"
+        tools:layout="@layout/fragment_talk_cam_detail">
+        <argument
+            android:name="TalkCamData"
+            app:argType="com.example.afreecaandroid.ui.model.TalkCamData" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_cook"
+        android:name="com.example.afreecaandroid.ui.view.CookFragment"
+        android:label="CookFragment"
+        tools:layout="@layout/fragment_cook"/>
+    <fragment
+        android:id="@+id/fragment_travel"
+        android:name="com.example.afreecaandroid.ui.view.TravelFragment"
+        android:label="TravelFragment"
+        tools:layout="@layout/fragment_travel"/>
+</navigation>

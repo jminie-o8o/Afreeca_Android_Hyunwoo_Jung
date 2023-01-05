@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,6 +43,7 @@ class TalkCamFragment : Fragment() {
         setTalkCamDataByUiState()
         showListEmptyText()
         getTalkCamData()
+        setClickListenerFromAdapter(talkCamPagingAdapter)
     }
 
     private fun setupRecyclerView(talkCamPagingAdapter: TalkCamPagingAdapter) {
@@ -99,6 +101,13 @@ class TalkCamFragment : Fragment() {
                     && loadState.append.endOfPaginationReached
 
             binding.tvEmptylist.isVisible = isListEmpty
+        }
+    }
+
+    private fun setClickListenerFromAdapter(talkCamPagingAdapter: TalkCamPagingAdapter) {
+        talkCamPagingAdapter.setOnItemClickListener { talkCamData ->
+            val actions = TalkCamFragmentDirections.actionFragmentTalkCamToFragmentTalkCamDetail(talkCamData)
+            findNavController().navigate(actions)
         }
     }
 

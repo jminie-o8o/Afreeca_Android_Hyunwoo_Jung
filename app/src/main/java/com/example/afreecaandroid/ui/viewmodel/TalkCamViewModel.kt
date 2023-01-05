@@ -1,5 +1,6 @@
 package com.example.afreecaandroid.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -25,6 +26,9 @@ class TalkCamViewModel @Inject constructor(
     private val _talkCamBroadCastList = MutableStateFlow<UiState<PagingData<TalkCamData>>>(UiState.Loading)
     val talkCamBroadCastList: StateFlow<UiState<PagingData<TalkCamData>>> = _talkCamBroadCastList.asStateFlow()
 
+    private val _talkCamBroadCastDetail = MutableStateFlow<UiState<TalkCamData>>(UiState.Loading)
+    val talkCamBroadCastDetail: StateFlow<UiState<TalkCamData>> = _talkCamBroadCastDetail.asStateFlow()
+
     fun getTalkCamBroadCastList() {
         viewModelScope.launch(Dispatchers.IO) {
             val categoryName = async {
@@ -38,6 +42,18 @@ class TalkCamViewModel @Inject constructor(
                 .collect {
                     _talkCamBroadCastList.value = UiState.Success(it)
                 }
+        }
+    }
+
+    fun setTalkCamDetailData(talkCamData: TalkCamData) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                Log.d("테스트 뷰모델", talkCamData.toString())
+                _talkCamBroadCastDetail.value = UiState.Success(talkCamData)
+            } catch (e: Exception) {
+                _talkCamBroadCastDetail.value = UiState.Error
+                throw e
+            }
         }
     }
 }

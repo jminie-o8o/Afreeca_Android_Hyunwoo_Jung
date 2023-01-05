@@ -18,11 +18,7 @@
         android:id="@+id/fragment_talk_cam_detail"
         android:name="com.example.afreecaandroid.ui.view.TalkCamDetailFragment"
         android:label="TalkCamDetailFragment"
-        tools:layout="@layout/fragment_talk_cam_detail">
-        <argument
-            android:name="TalkCamData"
-            app:argType="com.example.afreecaandroid.ui.model.TalkCamData" />
-    </fragment>
+        tools:layout="@layout/fragment_talk_cam_detail"/>
     <fragment
         android:id="@+id/fragment_cook"
         android:name="com.example.afreecaandroid.ui.view.CookFragment"

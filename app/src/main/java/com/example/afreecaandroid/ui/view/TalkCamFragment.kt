@@ -1,12 +1,14 @@
 package com.example.afreecaandroid.ui.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
@@ -26,7 +28,7 @@ class TalkCamFragment : Fragment() {
 
     private var _binding: FragmentTalkCamBinding? = null
     private val binding get() = _binding!!
-    private val talkCamViewModel: TalkCamViewModel by viewModels()
+    private val talkCamViewModel: TalkCamViewModel by activityViewModels()
     private lateinit var talkCamPagingAdapter: TalkCamPagingAdapter
 
     override fun onCreateView(
@@ -108,7 +110,8 @@ class TalkCamFragment : Fragment() {
 
     private fun setClickListenerFromAdapter(talkCamPagingAdapter: TalkCamPagingAdapter) {
         talkCamPagingAdapter.setOnItemClickListener { talkCamData ->
-            val actions = TalkCamFragmentDirections.actionFragmentTalkCamToFragmentTalkCamDetail(talkCamData)
+            talkCamViewModel.setTalkCamDetailData(talkCamData)
+            val actions = TalkCamFragmentDirections.actionFragmentTalkCamToFragmentTalkCamDetail()
             findNavController().navigate(actions)
         }
     }

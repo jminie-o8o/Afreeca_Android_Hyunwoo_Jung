@@ -17,7 +17,7 @@
 
         <ImageView
             android:id="@+id/iv_broadcast_thumb_nail"
-            setImage="@{talkCamData.broadThumbnail}"
+            setThumbnail="@{talkCamData.broadThumbnail}"
             android:layout_width="190dp"
             android:layout_height="110dp"
             android:contentDescription="broadcast_thumbnail"

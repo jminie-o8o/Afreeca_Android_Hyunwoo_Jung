@@ -6,21 +6,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.example.afreecaandroid.R
 import com.example.afreecaandroid.databinding.FragmentTalkCamBinding
 import com.example.afreecaandroid.databinding.FragmentTalkCamDetailBinding
+import com.example.afreecaandroid.ui.viewmodel.TalkCamViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class TalkCamDetailFragment : Fragment() {
 
     private var _binding: FragmentTalkCamDetailBinding? = null
     private val binding get() = _binding!!
+    private val talkCamViewModel: TalkCamViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_talk_cam_detail, container, false)
+        binding.viewModel = talkCamViewModel
         return binding.root
     }
 

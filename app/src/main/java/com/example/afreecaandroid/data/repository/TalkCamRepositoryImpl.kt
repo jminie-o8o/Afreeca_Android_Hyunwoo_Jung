@@ -17,7 +17,7 @@ class TalkCamRepositoryImpl @Inject constructor(
     override fun getTalkCamBroadCastList(): Flow<PagingData<TalkCamData>> {
         return talkCamDataSource.getTalkCamBroadCastList().map { pagingDTO ->
             pagingDTO.map { board ->
-                TalkCamData.toBookFromApi(board)
+                TalkCamData.toTalkCamDataFromApi(board)
             }
         }
     }

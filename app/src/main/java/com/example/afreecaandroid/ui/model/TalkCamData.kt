@@ -11,7 +11,7 @@ data class TalkCamData(
 ) {
     companion object {
         // DTO 에서 받아온 데이터를 UI 에서 사용할 엔티티로 바꾸어 주는 함수
-        fun toBookFromApi(board: TalkCamApiDTO.Broad) = TalkCamData(
+        fun toTalkCamDataFromApi(board: TalkCamApiDTO.Broad) = TalkCamData(
             userId = board.userId,
             broadThumbnail = board.broadThumb,
             broadTitle = board.broadTitle,

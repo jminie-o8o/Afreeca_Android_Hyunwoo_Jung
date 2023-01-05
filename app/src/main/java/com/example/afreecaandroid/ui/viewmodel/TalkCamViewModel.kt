@@ -8,6 +8,8 @@ import com.example.afreecaandroid.data.repository.TalkCamRepository
 import com.example.afreecaandroid.ui.model.TalkCamData
 import com.example.afreecaandroid.uitl.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -24,8 +26,11 @@ class TalkCamViewModel @Inject constructor(
     val talkCamBroadCastList: StateFlow<UiState<PagingData<TalkCamData>>> = _talkCamBroadCastList.asStateFlow()
 
     fun getTalkCamBroadCastList() {
-        viewModelScope.launch {
-            talkCamRepository.getTalkCamBroadCastList()
+        viewModelScope.launch(Dispatchers.IO) {
+            val categoryName = async {
+                talkCamRepository.getCategoryNum()
+            }
+            talkCamRepository.getTalkCamBroadCastList(categoryName.await())
                 .cachedIn(viewModelScope)
                 .catch {
                     _talkCamBroadCastList.value = UiState.Error

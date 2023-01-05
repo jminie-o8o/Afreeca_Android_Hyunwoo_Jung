@@ -8,6 +8,7 @@ interface TalkCamDataSourceApi {
 
     @GET("broad/list")
     suspend fun searchUser(
-        @Query("client_id") clientId: String
+        @Query("client_id") clientId: String,
+        @Query("page_no") pageNum: Int
     ): TalkCamApiDTO
 }

@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.afreecaandroid.data.api.CategoryApi
 import com.example.afreecaandroid.data.api.TalkCamDataSourceApi
-import com.example.afreecaandroid.data.model.TalkCamApiDTO
+import com.example.afreecaandroid.data.model.Broad
 import com.example.afreecaandroid.data.pagingsource.TalkCamPagingSource
 import com.example.afreecaandroid.uitl.Constants
 import kotlinx.coroutines.flow.Flow
@@ -16,10 +16,16 @@ import javax.inject.Singleton
 class TalkCamDataSourceImpl @Inject constructor(
     private val talkCamDataSourceApi: TalkCamDataSourceApi,
     private val categoryApi: CategoryApi
-): TalkCamDataSource {
+) : TalkCamDataSource {
 
-    override fun getTalkCamBroadCastList(): Flow<PagingData<TalkCamApiDTO.Broad>> {
-        val pagingSourceFactory = { TalkCamPagingSource(talkCamDataSourceApi, categoryApi) }
+    override suspend fun getCategoryNum(): String {
+        return categoryApi.getCategory(Constants.CLIENT_ID).broadCategory.filter {
+            it.cateName == Constants.TALK_CAM
+        }[0].cateNo
+    }
+
+    override fun getTalkCamBroadCastList(categoryNum: String): Flow<PagingData<Broad>> {
+        val pagingSourceFactory = { TalkCamPagingSource(talkCamDataSourceApi, categoryNum) }
 
         return Pager(
             config = PagingConfig(

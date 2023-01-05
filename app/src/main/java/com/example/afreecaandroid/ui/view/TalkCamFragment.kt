@@ -1,15 +1,14 @@
 package com.example.afreecaandroid.ui.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.paging.LoadState
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.afreecaandroid.R
@@ -40,12 +39,14 @@ class TalkCamFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         talkCamPagingAdapter = TalkCamPagingAdapter()
         setupRecyclerView(talkCamPagingAdapter)
-        updateSearchWord()
+        setTalkCamDataByUiState()
         showListEmptyText()
+        getTalkCamData()
     }
 
     private fun setupRecyclerView(talkCamPagingAdapter: TalkCamPagingAdapter) {
         binding.rvTalkCam.apply {
+            adapter = talkCamPagingAdapter
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             addItemDecoration(
@@ -57,7 +58,7 @@ class TalkCamFragment : Fragment() {
         }
     }
 
-    private fun updateSearchWord() {
+    private fun setTalkCamDataByUiState() {
         collectLatestStateFlow(talkCamViewModel.talkCamBroadCastList) { uiState ->
             when(uiState) {
                 is UiState.Loading -> {
@@ -84,6 +85,10 @@ class TalkCamFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun getTalkCamData() {
+        talkCamViewModel.getTalkCamBroadCastList()
     }
 
     private fun showListEmptyText() {

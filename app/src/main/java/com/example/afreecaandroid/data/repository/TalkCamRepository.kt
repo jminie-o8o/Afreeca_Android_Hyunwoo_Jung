@@ -6,5 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface TalkCamRepository {
 
-    fun getTalkCamBroadCastList(): Flow<PagingData<TalkCamData>>
+    suspend fun getCategoryNum(): String
+
+    fun getTalkCamBroadCastList(categoryNum: String): Flow<PagingData<TalkCamData>>
 }

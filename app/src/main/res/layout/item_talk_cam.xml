@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="talkCamData"
             type="com.example.afreecaandroid.ui.model.TalkCamData" />
@@ -16,6 +17,7 @@
 
         <ImageView
             android:id="@+id/iv_broadcast_thumb_nail"
+            setImage="@{talkCamData.broadThumbnail}"
             android:layout_width="190dp"
             android:layout_height="110dp"
             android:contentDescription="broadcast_thumbnail"
@@ -28,12 +30,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
+            android:text="@{talkCamData.broadTitle}"
             app:layout_constraintStart_toEndOf="@+id/iv_broadcast_thumb_nail"
             app:layout_constraintTop_toTopOf="@+id/iv_broadcast_thumb_nail"
             tools:text="캠방/쿡방 타이틀입니다." />
 
         <ImageView
             android:id="@+id/iv_bj_thumb_nail"
+            setProfileImage="@{talkCamData.profileImage}"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
@@ -46,18 +50,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:text="@{talkCamData.userId}"
             app:layout_constraintStart_toEndOf="@+id/iv_bj_thumb_nail"
             app:layout_constraintTop_toTopOf="@+id/iv_bj_thumb_nail"
-            tools:text="Bj 이름"/>
+            tools:text="Bj 이름" />
 
         <TextView
             android:id="@+id/tv_view_count"
+            setViewer="@{talkCamData.totalViewCount}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="@+id/tv_bj_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_bj_name"
-            tools:text="100명 시청중"/>
+            tools:text="100명 시청중" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

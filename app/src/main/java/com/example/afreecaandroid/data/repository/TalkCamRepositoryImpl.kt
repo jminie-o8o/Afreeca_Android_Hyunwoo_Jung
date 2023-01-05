@@ -14,9 +14,13 @@ class TalkCamRepositoryImpl @Inject constructor(
     private val talkCamDataSource: TalkCamDataSource
 ): TalkCamRepository {
 
-    override fun getTalkCamBroadCastList(): Flow<PagingData<TalkCamData>> {
-        return talkCamDataSource.getTalkCamBroadCastList().map { pagingDTO ->
-            pagingDTO.map { board ->
+    override suspend fun getCategoryNum(): String {
+        return talkCamDataSource.getCategoryNum()
+    }
+
+    override fun getTalkCamBroadCastList(categoryNum: String): Flow<PagingData<TalkCamData>> {
+        return talkCamDataSource.getTalkCamBroadCastList(categoryNum).map { pagingBroadList ->
+            pagingBroadList.map { board ->
                 TalkCamData.toTalkCamDataFromApi(board)
             }
         }

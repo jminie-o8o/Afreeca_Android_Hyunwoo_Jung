@@ -17,8 +17,8 @@ class CookRepositoryImpl @Inject constructor(
         return cookDataSource.getCategoryNum()
     }
 
-    override fun getTalkCamBroadCastList(categoryNum: String): Flow<PagingData<UiData>> {
-        return cookDataSource.getTalkCamBroadCastList(categoryNum).map { pagingBroadList ->
+    override fun getCookBroadCastList(categoryNum: String): Flow<PagingData<UiData>> {
+        return cookDataSource.getCookBroadCastList(categoryNum).map { pagingBroadList ->
             pagingBroadList.map { board ->
                 UiData.toTalkCamDataFromApi(board)
             }

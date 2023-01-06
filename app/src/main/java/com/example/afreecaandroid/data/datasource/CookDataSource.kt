@@ -8,5 +8,5 @@ interface CookDataSource {
 
     suspend fun getCategoryNum(): String
 
-    fun getTalkCamBroadCastList(categoryNum: String): Flow<PagingData<Broad>>
+    fun getCookBroadCastList(categoryNum: String): Flow<PagingData<Broad>>
 }

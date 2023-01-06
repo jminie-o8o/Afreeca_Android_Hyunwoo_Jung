@@ -33,7 +33,7 @@ class CookViewModel @Inject constructor(
             val categoryName = async {
                 cookRepository.getCategoryNum()
             }
-            cookRepository.getTalkCamBroadCastList(categoryName.await())
+            cookRepository.getCookBroadCastList(categoryName.await())
                 .cachedIn(viewModelScope)
                 .catch {
                     _cookBroadCastList.value = UiState.Error

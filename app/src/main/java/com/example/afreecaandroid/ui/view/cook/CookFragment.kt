@@ -16,13 +16,13 @@ import com.example.afreecaandroid.R
 import com.example.afreecaandroid.databinding.FragmentCookBinding
 import com.example.afreecaandroid.ui.adapter.UiDataPagingAdapter
 import com.example.afreecaandroid.ui.view.MainActivity
-import com.example.afreecaandroid.ui.view.talkcam.TalkCamFragmentDirections
 import com.example.afreecaandroid.ui.viewmodel.CookViewModel
-import com.example.afreecaandroid.ui.viewmodel.TalkCamViewModel
 import com.example.afreecaandroid.uitl.UiState
 import com.example.afreecaandroid.uitl.collectLatestStateFlow
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CookFragment : Fragment() {
 
     private var _binding: FragmentCookBinding? = null

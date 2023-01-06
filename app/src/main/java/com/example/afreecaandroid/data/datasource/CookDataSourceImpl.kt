@@ -24,7 +24,7 @@ class CookDataSourceImpl @Inject constructor(
         }[0].cateNo
     }
 
-    override fun getTalkCamBroadCastList(categoryNum: String): Flow<PagingData<Broad>> {
+    override fun getCookBroadCastList(categoryNum: String): Flow<PagingData<Broad>> {
         val pagingSourceFactory = { CookPagingSource(cookDataSourceApi, categoryNum) }
 
         return Pager(

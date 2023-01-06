@@ -8,5 +8,5 @@ interface CookRepository {
 
     suspend fun getCategoryNum(): String
 
-    fun getTalkCamBroadCastList(categoryNum: String): Flow<PagingData<UiData>>
+    fun getCookBroadCastList(categoryNum: String): Flow<PagingData<UiData>>
 }

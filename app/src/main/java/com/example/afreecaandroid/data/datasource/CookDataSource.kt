@@ -6,7 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface CookDataSource {
 
-    suspend fun getCategoryNum(): String
-
-    fun getCookBroadCastList(categoryNum: String): Flow<PagingData<Broad>>
+    fun getCookBroadCastList(): Flow<PagingData<Broad>>
 }

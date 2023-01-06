@@ -12,7 +12,6 @@ import com.example.afreecaandroid.uitl.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -44,10 +43,7 @@ class CookViewModel @Inject constructor(
 
     fun getCookBroadCastList() {
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
-            val categoryName = async {
-                cookRepository.getCategoryNum()
-            }
-            cookRepository.getCookBroadCastList(categoryName.await())
+            cookRepository.getCookBroadCastList()
                 .cachedIn(viewModelScope)
                 .catch { throwable ->
                     _cookBroadCastList.value = UiState.Error

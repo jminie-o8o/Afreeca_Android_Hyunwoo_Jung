@@ -3,10 +3,10 @@ package com.example.afreecaandroid.data.datasource
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.afreecaandroid.data.api.CategoryApi
 import com.example.afreecaandroid.data.api.TravelDataSourceApi
 import com.example.afreecaandroid.data.model.Broad
 import com.example.afreecaandroid.data.pagingsource.TravelPagingSource
+import com.example.afreecaandroid.data.session.CategorySession
 import com.example.afreecaandroid.uitl.Constants
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -15,16 +15,14 @@ import javax.inject.Singleton
 @Singleton
 class TravelDataSourceImpl @Inject constructor(
     private val travelDataSourceApi: TravelDataSourceApi,
-    private val categoryApi: CategoryApi
+    private val categorySession: CategorySession
 ) : TravelDataSource {
 
-    override suspend fun getCategoryNum(): String {
-        return categoryApi.getCategory(Constants.CLIENT_ID).broadCategory.filter {
+    override fun getTalkCamBroadCastList(): Flow<PagingData<Broad>> {
+        val categoryNum = categorySession.categoryApiDTO .filter {
             it.cateName == Constants.TRAVEL
         }[0].cateNo
-    }
 
-    override fun getTalkCamBroadCastList(categoryNum: String): Flow<PagingData<Broad>> {
         val pagingSourceFactory = { TravelPagingSource(travelDataSourceApi, categoryNum) }
 
         return Pager(

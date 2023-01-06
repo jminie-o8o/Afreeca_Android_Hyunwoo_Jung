@@ -14,12 +14,8 @@ class TravelRepositoryImpl @Inject constructor(
     private val travelDataSource: TravelDataSource
 ) : TravelRepository {
 
-    override suspend fun getCategoryNum(): String {
-        return travelDataSource.getCategoryNum()
-    }
-
-    override fun getTalkCamBroadCastList(categoryNum: String): Flow<PagingData<UiData>> {
-        return travelDataSource.getTalkCamBroadCastList(categoryNum).map { pagingBroadList ->
+    override fun getTalkCamBroadCastList(): Flow<PagingData<UiData>> {
+        return travelDataSource.getTalkCamBroadCastList().map { pagingBroadList ->
             pagingBroadList.map { board ->
                 UiData.toTalkCamDataFromApi(board)
             }

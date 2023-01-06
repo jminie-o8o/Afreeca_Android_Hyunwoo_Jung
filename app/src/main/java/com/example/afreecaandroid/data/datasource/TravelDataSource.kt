@@ -6,7 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface TravelDataSource {
 
-    suspend fun getCategoryNum(): String
-
-    fun getTalkCamBroadCastList(categoryNum: String): Flow<PagingData<Broad>>
+    fun getTalkCamBroadCastList(): Flow<PagingData<Broad>>
 }

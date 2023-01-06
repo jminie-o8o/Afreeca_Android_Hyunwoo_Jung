@@ -7,10 +7,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.paging.LoadState
 import com.example.afreecaandroid.R
 import com.example.afreecaandroid.databinding.FragmentTravelDetailBinding
-import com.example.afreecaandroid.ui.adapter.UiDataPagingAdapter
 import com.example.afreecaandroid.ui.view.MainActivity
 import com.example.afreecaandroid.ui.viewmodel.TravelViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView

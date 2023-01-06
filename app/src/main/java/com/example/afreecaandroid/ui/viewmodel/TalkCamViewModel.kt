@@ -12,7 +12,6 @@ import com.example.afreecaandroid.uitl.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -44,10 +43,11 @@ class TalkCamViewModel @Inject constructor(
 
     fun getTalkCamBroadCastList() {
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
-            val categoryName = async {
+            val categoryJob = launch {
                 talkCamRepository.getCategoryNum()
             }
-            talkCamRepository.getTalkCamBroadCastList(categoryName.await())
+            categoryJob.join()
+            talkCamRepository.getTalkCamBroadCastList()
                 .cachedIn(viewModelScope)
                 .catch { throwable->
                     _talkCamBroadCastList.value = UiState.Error

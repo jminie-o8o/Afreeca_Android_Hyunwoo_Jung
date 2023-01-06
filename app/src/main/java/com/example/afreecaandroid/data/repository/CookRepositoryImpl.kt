@@ -13,12 +13,9 @@ import javax.inject.Singleton
 class CookRepositoryImpl @Inject constructor(
     private val cookDataSource: CookDataSource
 ) : CookRepository {
-    override suspend fun getCategoryNum(): String {
-        return cookDataSource.getCategoryNum()
-    }
 
-    override fun getCookBroadCastList(categoryNum: String): Flow<PagingData<UiData>> {
-        return cookDataSource.getCookBroadCastList(categoryNum).map { pagingBroadList ->
+    override fun getCookBroadCastList(): Flow<PagingData<UiData>> {
+        return cookDataSource.getCookBroadCastList().map { pagingBroadList ->
             pagingBroadList.map { board ->
                 UiData.toTalkCamDataFromApi(board)
             }

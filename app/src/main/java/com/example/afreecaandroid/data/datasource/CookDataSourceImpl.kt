@@ -3,10 +3,10 @@ package com.example.afreecaandroid.data.datasource
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.afreecaandroid.data.api.CategoryApi
 import com.example.afreecaandroid.data.api.CookDataSourceApi
 import com.example.afreecaandroid.data.model.Broad
 import com.example.afreecaandroid.data.pagingsource.CookPagingSource
+import com.example.afreecaandroid.data.session.CategorySession
 import com.example.afreecaandroid.uitl.Constants
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -15,16 +15,14 @@ import javax.inject.Singleton
 @Singleton
 class CookDataSourceImpl @Inject constructor(
     private val cookDataSourceApi: CookDataSourceApi,
-    private val categoryApi: CategoryApi
+    private val categorySession: CategorySession
 ) : CookDataSource {
 
-    override suspend fun getCategoryNum(): String {
-        return categoryApi.getCategory(Constants.CLIENT_ID).broadCategory.filter {
+    override fun getCookBroadCastList(): Flow<PagingData<Broad>> {
+        val categoryNum = categorySession.categoryApiDTO .filter {
             it.cateName == Constants.COOK
         }[0].cateNo
-    }
 
-    override fun getCookBroadCastList(categoryNum: String): Flow<PagingData<Broad>> {
         val pagingSourceFactory = { CookPagingSource(cookDataSourceApi, categoryNum) }
 
         return Pager(

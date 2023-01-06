@@ -3,7 +3,7 @@ package com.example.afreecaandroid.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class TalkCamApiDTO(
+data class DataSourceDTO(
     @SerializedName("total_cnt")
     val totalCnt: Int,
     @SerializedName("page_block")

@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="talkCamData"
-            type="com.example.afreecaandroid.ui.model.TalkCamData" />
+            name="uiData"
+            type="com.example.afreecaandroid.ui.model.UiData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
 
         <ImageView
             android:id="@+id/iv_broadcast_thumb_nail"
-            setThumbnail="@{talkCamData.broadThumbnail}"
+            setThumbnail="@{uiData.broadThumbnail}"
             android:layout_width="190dp"
             android:layout_height="110dp"
             android:contentDescription="broadcast_thumbnail"
@@ -34,7 +34,7 @@
             android:layout_marginEnd="10dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@{talkCamData.broadTitle}"
+            android:text="@{uiData.broadTitle}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_broadcast_thumb_nail"
             app:layout_constraintTop_toTopOf="@+id/iv_broadcast_thumb_nail"
@@ -42,7 +42,7 @@
 
         <ImageView
             android:id="@+id/iv_bj_thumb_nail"
-            setProfileImage="@{talkCamData.profileImage}"
+            setProfileImage="@{uiData.profileImage}"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="@{talkCamData.userId}"
+            android:text="@{uiData.userId}"
             app:layout_constraintStart_toEndOf="@+id/iv_bj_thumb_nail"
             app:layout_constraintTop_toTopOf="@+id/iv_bj_thumb_nail"
             tools:text="Bj 이름" />
@@ -64,7 +64,7 @@
         <TextView
             android:id="@+id/tv_view_count"
             style="@style/TextSubtitle1.14"
-            setViewer="@{talkCamData.totalViewCount}"
+            setViewer="@{uiData.totalViewCount}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

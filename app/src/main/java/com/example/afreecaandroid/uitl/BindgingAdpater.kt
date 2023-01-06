@@ -7,7 +7,7 @@ import androidx.databinding.BindingAdapter
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.example.afreecaandroid.R
-import com.example.afreecaandroid.ui.model.TalkCamData
+import com.example.afreecaandroid.ui.model.UiData
 
 // Coil 를 통해 url 을 받아와 imageView 에 표시
 @BindingAdapter("setThumbnail")
@@ -34,7 +34,7 @@ fun setViewer(view: TextView, viewer: String) {
 }
 
 @BindingAdapter("setProfileImageAtDetail")
-fun setProfileImageAtDetail(view: ImageView, uiState: UiState<TalkCamData>?) {
+fun setProfileImageAtDetail(view: ImageView, uiState: UiState<UiData>?) {
     if (uiState is UiState.Success) {
         view.load("https:${uiState.data.profileImage}") {
             placeholder(R.drawable.ic_baseline_image_not_supported_20) // 로딩 도중 이미지 표시
@@ -45,21 +45,21 @@ fun setProfileImageAtDetail(view: ImageView, uiState: UiState<TalkCamData>?) {
 }
 
 @BindingAdapter("setTitleAtDetail")
-fun setTitleAtDetail(view: TextView, uiState: UiState<TalkCamData>?) {
+fun setTitleAtDetail(view: TextView, uiState: UiState<UiData>?) {
     if (uiState is UiState.Success) {
         view.text = uiState.data.broadTitle
     }
 }
 
 @BindingAdapter("setNickNameAtDetail")
-fun setNickNameAtDetail(view: TextView, uiState: UiState<TalkCamData>?) {
+fun setNickNameAtDetail(view: TextView, uiState: UiState<UiData>?) {
     if (uiState is UiState.Success) {
         view.text = uiState.data.userId
     }
 }
 
 @BindingAdapter("setThumbnailImageAtDetail")
-fun setThumbnailImageAtDetail(view: ImageView, uiState: UiState<TalkCamData>?) {
+fun setThumbnailImageAtDetail(view: ImageView, uiState: UiState<UiData>?) {
     if (uiState is UiState.Success) {
         view.load("https:${uiState.data.broadThumbnail}") {
             placeholder(R.drawable.ic_baseline_image_not_supported_20) // 로딩 도중 이미지 표시

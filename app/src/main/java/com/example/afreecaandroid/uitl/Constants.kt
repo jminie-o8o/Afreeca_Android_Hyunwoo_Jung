@@ -6,4 +6,5 @@ object Constants {
     const val PAGE_SIZE = 10
     const val PAGE_BLOCK = 10
     const val TALK_CAM = "토크/캠방"
+    const val TRAVEL = "여행"
 }

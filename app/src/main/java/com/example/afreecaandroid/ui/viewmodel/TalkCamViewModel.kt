@@ -49,8 +49,9 @@ class TalkCamViewModel @Inject constructor(
             }
             talkCamRepository.getTalkCamBroadCastList(categoryName.await())
                 .cachedIn(viewModelScope)
-                .catch {
+                .catch { throwable->
                     _talkCamBroadCastList.value = UiState.Error
+                    _error.emit(CoroutineException.handleThrowableWithCEHModel(throwable))
                 }
                 .collect {
                     _talkCamBroadCastList.value = UiState.Success(it)
@@ -62,9 +63,9 @@ class TalkCamViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
             try {
                 _talkCamBroadCastDetail.value = UiState.Success(uiData)
-            } catch (e: Exception) {
+            } catch (throwable: Exception) {
                 _talkCamBroadCastDetail.value = UiState.Error
-                throw e
+                _error.emit(CoroutineException.handleThrowableWithCEHModel(throwable))
             }
         }
     }

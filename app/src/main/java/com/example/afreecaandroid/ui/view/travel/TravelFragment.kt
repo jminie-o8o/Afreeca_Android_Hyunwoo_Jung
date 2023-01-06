@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -48,6 +49,7 @@ class TravelFragment : Fragment() {
         setClickListenerFromAdapter(uiDataPagingAdapter)
         showBottomNavigation()
         handlePagingSourceError(uiDataPagingAdapter)
+        observeError()
     }
 
     private fun setupRecyclerView(uiDataPagingAdapter: UiDataPagingAdapter) {
@@ -131,6 +133,21 @@ class TravelFragment : Fragment() {
             }
             errorState?.error?.let { throwable ->
                 travelViewModel.handlePagingSourceError(throwable)
+            }
+        }
+    }
+
+    private fun observeError() {
+        collectLatestStateFlow(travelViewModel.error) { CEHModel ->
+            if (CEHModel.throwable != null) Toast.makeText(
+                requireContext(),
+                CEHModel.errorMessage,
+                Toast.LENGTH_SHORT
+            ).show()
+            with(binding) {
+                progressBarTravel.isVisible = false
+                tvEmptylistTravel.isVisible = true
+                rvTravel.isVisible = false
             }
         }
     }

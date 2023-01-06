@@ -49,8 +49,9 @@ class TravelViewModel @Inject constructor(
             }
             travelRepository.getTalkCamBroadCastList(categoryName.await())
                 .cachedIn(viewModelScope)
-                .catch {
+                .catch { throwable ->
                     _travelBroadCastList.value = UiState.Error
+                    _error.emit(CoroutineException.handleThrowableWithCEHModel(throwable))
                 }
                 .collect {
                     _travelBroadCastList.value = UiState.Success(it)
@@ -62,9 +63,9 @@ class TravelViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
             try {
                 _travelBroadCastDetail.value = UiState.Success(uiData)
-            } catch (e: Exception) {
+            } catch (throwable: Exception) {
                 _travelBroadCastDetail.value = UiState.Error
-                throw e
+                _error.emit(CoroutineException.handleThrowableWithCEHModel(throwable))
             }
         }
     }

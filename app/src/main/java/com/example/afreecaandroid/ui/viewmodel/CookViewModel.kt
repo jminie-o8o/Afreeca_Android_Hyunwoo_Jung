@@ -49,8 +49,9 @@ class CookViewModel @Inject constructor(
             }
             cookRepository.getCookBroadCastList(categoryName.await())
                 .cachedIn(viewModelScope)
-                .catch {
+                .catch { throwable ->
                     _cookBroadCastList.value = UiState.Error
+                    _error.emit(CoroutineException.handleThrowableWithCEHModel(throwable))
                 }
                 .collect {
                     _cookBroadCastList.value = UiState.Success(it)
@@ -62,9 +63,9 @@ class CookViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
             try {
                 _cookBroadCastDetail.value = UiState.Success(uiData)
-            } catch (e: Exception) {
+            } catch (throwable: Exception) {
                 _cookBroadCastDetail.value = UiState.Error
-                throw e
+                _error.emit(CoroutineException.handleThrowableWithCEHModel(throwable))
             }
         }
     }

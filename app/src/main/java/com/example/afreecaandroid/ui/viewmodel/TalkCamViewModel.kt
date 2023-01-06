@@ -1,6 +1,5 @@
 package com.example.afreecaandroid.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -48,7 +47,6 @@ class TalkCamViewModel @Inject constructor(
     fun setTalkCamDetailData(talkCamData: TalkCamData) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                Log.d("테스트 뷰모델", talkCamData.toString())
                 _talkCamBroadCastDetail.value = UiState.Success(talkCamData)
             } catch (e: Exception) {
                 _talkCamBroadCastDetail.value = UiState.Error

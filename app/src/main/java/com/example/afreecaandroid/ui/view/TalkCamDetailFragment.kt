@@ -1,16 +1,13 @@
 package com.example.afreecaandroid.ui.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
 import com.example.afreecaandroid.R
-import com.example.afreecaandroid.databinding.FragmentTalkCamBinding
 import com.example.afreecaandroid.databinding.FragmentTalkCamDetailBinding
 import com.example.afreecaandroid.ui.viewmodel.TalkCamViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView

@@ -2,20 +2,20 @@ package com.example.afreecaandroid.data.pagingsource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.afreecaandroid.data.api.TravelDataSourceApi
+import com.example.afreecaandroid.data.api.CookDataSourceApi
 import com.example.afreecaandroid.data.model.Broad
 import com.example.afreecaandroid.uitl.Constants
 
-class TravelPagingSource(
-    private val travelDataSourceApi: TravelDataSourceApi,
+class CookPagingSource(
+    private val cookDataSourceApi: CookDataSourceApi,
     private val categoryNum: String
 ) : PagingSource<Int, Broad>() {
 
-    override suspend fun load(params: LoadParams<Int>): PagingSource.LoadResult<Int, Broad> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Broad> {
         return try {
             val pageNumber = params.key ?: STARTING_PAGE_INDEX
 
-            val dataSourceDTO = travelDataSourceApi.searchTravelBroadcast(Constants.CLIENT_ID, pageNumber)
+            val dataSourceDTO = cookDataSourceApi.searchCookBroadcast(Constants.CLIENT_ID, pageNumber)
             val broadList = dataSourceDTO.broad
 
             val talkCamList = broadList.filter { broadList ->

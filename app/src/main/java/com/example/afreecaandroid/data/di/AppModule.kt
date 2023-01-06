@@ -1,6 +1,7 @@
 package com.example.afreecaandroid.data.di
 
 import com.example.afreecaandroid.data.api.CategoryApi
+import com.example.afreecaandroid.data.api.CookDataSourceApi
 import com.example.afreecaandroid.data.api.TalkCamDataSourceApi
 import com.example.afreecaandroid.data.api.TravelDataSourceApi
 import com.example.afreecaandroid.uitl.Constants.BASE_URL
@@ -50,6 +51,12 @@ object AppModule {
     @Provides
     fun provideTravelService(retrofit: Retrofit): TravelDataSourceApi {
         return retrofit.create(TravelDataSourceApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCookService(retrofit: Retrofit): CookDataSourceApi {
+        return retrofit.create(CookDataSourceApi::class.java)
     }
 
     @Singleton

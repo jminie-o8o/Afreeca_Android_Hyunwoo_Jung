@@ -1,5 +1,7 @@
 package com.example.afreecaandroid.data.di
 
+import com.example.afreecaandroid.data.datasource.CookDataSource
+import com.example.afreecaandroid.data.datasource.CookDataSourceImpl
 import com.example.afreecaandroid.data.datasource.TalkCamDataSource
 import com.example.afreecaandroid.data.datasource.TalkCamDataSourceImpl
 import com.example.afreecaandroid.data.datasource.TravelDataSource
@@ -25,4 +27,10 @@ abstract class DataSourceModule {
     abstract fun bindTravelDataSource(
         travelDataSourceImpl: TravelDataSourceImpl
     ): TravelDataSource
+
+    @Singleton
+    @Binds
+    abstract fun bindCookDataSource(
+        cookDataSourceImpl: CookDataSourceImpl
+    ): CookDataSource
 }

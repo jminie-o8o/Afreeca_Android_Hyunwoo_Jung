@@ -1,5 +1,7 @@
 package com.example.afreecaandroid.data.di
 
+import com.example.afreecaandroid.data.repository.CookRepository
+import com.example.afreecaandroid.data.repository.CookRepositoryImpl
 import com.example.afreecaandroid.data.repository.TalkCamRepository
 import com.example.afreecaandroid.data.repository.TalkCamRepositoryImpl
 import com.example.afreecaandroid.data.repository.TravelRepository
@@ -25,4 +27,10 @@ abstract class RepositoryModule {
     abstract fun bindTravelRepository(
         travelRepositoryImpl: TravelRepositoryImpl
     ): TravelRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindCookRepository(
+        cookRepositoryImpl: CookRepositoryImpl
+    ): CookRepository
 }

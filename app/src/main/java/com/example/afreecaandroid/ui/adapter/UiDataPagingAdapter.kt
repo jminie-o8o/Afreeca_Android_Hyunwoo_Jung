@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.afreecaandroid.databinding.ItemTalkCamBinding
 import com.example.afreecaandroid.ui.model.TalkCamData
 
-class TalkCamPagingAdapter :
-    PagingDataAdapter<TalkCamData, TalkCamPagingAdapter.TalkCamViewHolder>(TalkCamDiffCallback) {
+class UiDataPagingAdapter :
+    PagingDataAdapter<TalkCamData, UiDataPagingAdapter.TalkCamViewHolder>(TalkCamDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TalkCamViewHolder {
         return TalkCamViewHolder(

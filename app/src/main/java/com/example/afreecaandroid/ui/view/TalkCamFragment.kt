@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.afreecaandroid.R
 import com.example.afreecaandroid.databinding.FragmentTalkCamBinding
-import com.example.afreecaandroid.ui.adapter.TalkCamPagingAdapter
+import com.example.afreecaandroid.ui.adapter.UiDataPagingAdapter
 import com.example.afreecaandroid.ui.viewmodel.TalkCamViewModel
 import com.example.afreecaandroid.uitl.UiState
 import com.example.afreecaandroid.uitl.collectLatestStateFlow
@@ -27,7 +27,7 @@ class TalkCamFragment : Fragment() {
     private var _binding: FragmentTalkCamBinding? = null
     private val binding get() = _binding!!
     private val talkCamViewModel: TalkCamViewModel by activityViewModels()
-    private lateinit var talkCamPagingAdapter: TalkCamPagingAdapter
+    private lateinit var uiDataPagingAdapter: UiDataPagingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,18 +39,18 @@ class TalkCamFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        talkCamPagingAdapter = TalkCamPagingAdapter()
-        setupRecyclerView(talkCamPagingAdapter)
+        uiDataPagingAdapter = UiDataPagingAdapter()
+        setupRecyclerView(uiDataPagingAdapter)
         setTalkCamDataByUiState()
         showListEmptyText()
         getTalkCamData()
-        setClickListenerFromAdapter(talkCamPagingAdapter)
+        setClickListenerFromAdapter(uiDataPagingAdapter)
         showBottomNavigation()
     }
 
-    private fun setupRecyclerView(talkCamPagingAdapter: TalkCamPagingAdapter) {
+    private fun setupRecyclerView(uiDataPagingAdapter: UiDataPagingAdapter) {
         binding.rvTalkCam.apply {
-            adapter = talkCamPagingAdapter
+            adapter = uiDataPagingAdapter
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             addItemDecoration(
@@ -85,7 +85,7 @@ class TalkCamFragment : Fragment() {
                         tvEmptylist.isVisible = false
                         rvTalkCam.isVisible = true
                     }
-                    talkCamPagingAdapter.submitData(uiState.data)
+                    uiDataPagingAdapter.submitData(uiState.data)
                 }
             }
         }
@@ -96,9 +96,9 @@ class TalkCamFragment : Fragment() {
     }
 
     private fun showListEmptyText() {
-        talkCamPagingAdapter.addLoadStateListener { combinedLoadStates ->
+        uiDataPagingAdapter.addLoadStateListener { combinedLoadStates ->
             val loadState = combinedLoadStates.source
-            val isListEmpty = talkCamPagingAdapter.itemCount < 1
+            val isListEmpty = uiDataPagingAdapter.itemCount < 1
                     && loadState.refresh is LoadState.NotLoading
                     && loadState.append.endOfPaginationReached
 
@@ -106,8 +106,8 @@ class TalkCamFragment : Fragment() {
         }
     }
 
-    private fun setClickListenerFromAdapter(talkCamPagingAdapter: TalkCamPagingAdapter) {
-        talkCamPagingAdapter.setOnItemClickListener { talkCamData ->
+    private fun setClickListenerFromAdapter(uiDataPagingAdapter: UiDataPagingAdapter) {
+        uiDataPagingAdapter.setOnItemClickListener { talkCamData ->
             talkCamViewModel.setTalkCamDetailData(talkCamData)
             val actions = TalkCamFragmentDirections.actionFragmentTalkCamToFragmentTalkCamDetail()
             findNavController().navigate(actions)

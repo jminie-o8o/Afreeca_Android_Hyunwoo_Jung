@@ -6,11 +6,16 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.afreecaandroid.data.repository.TalkCamRepository
 import com.example.afreecaandroid.ui.model.UiData
+import com.example.afreecaandroid.uitl.CEHModel
+import com.example.afreecaandroid.uitl.CoroutineException
 import com.example.afreecaandroid.uitl.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
@@ -28,8 +33,17 @@ class TalkCamViewModel @Inject constructor(
     private val _talkCamBroadCastDetail = MutableStateFlow<UiState<UiData>>(UiState.Loading)
     val talkCamBroadCastDetail: StateFlow<UiState<UiData>> = _talkCamBroadCastDetail.asStateFlow()
 
+    private val _error = MutableSharedFlow<CEHModel>()
+    val error: SharedFlow<CEHModel> = _error
+
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        viewModelScope.launch {
+            _error.emit(CoroutineException.handleThrowableWithCEHModel(throwable))
+        }
+    }
+
     fun getTalkCamBroadCastList() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
             val categoryName = async {
                 talkCamRepository.getCategoryNum()
             }
@@ -45,13 +59,19 @@ class TalkCamViewModel @Inject constructor(
     }
 
     fun setTalkCamDetailData(uiData: UiData) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
             try {
                 _talkCamBroadCastDetail.value = UiState.Success(uiData)
             } catch (e: Exception) {
                 _talkCamBroadCastDetail.value = UiState.Error
                 throw e
             }
+        }
+    }
+
+    fun handlePagingSourceError(throwable: Throwable) {
+        viewModelScope.launch {
+            _error.emit(CoroutineException.handleThrowableWithCEHModel(throwable))
         }
     }
 }

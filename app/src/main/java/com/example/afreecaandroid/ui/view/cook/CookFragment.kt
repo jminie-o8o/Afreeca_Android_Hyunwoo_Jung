@@ -47,6 +47,7 @@ class CookFragment : Fragment() {
         showListEmptyText()
         setClickListenerFromAdapter(uiDataPagingAdapter)
         showBottomNavigation()
+        handlePagingSourceError(uiDataPagingAdapter)
     }
 
     private fun setupRecyclerView(uiDataPagingAdapter: UiDataPagingAdapter) {
@@ -118,6 +119,20 @@ class CookFragment : Fragment() {
 
     private fun getTalkCamData() {
         cookViewModel.getCookBroadCastList()
+    }
+
+    private fun handlePagingSourceError(uiDataPagingAdapter: UiDataPagingAdapter) {
+        uiDataPagingAdapter.addLoadStateListener { loadState ->
+            val errorState = when {
+                loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+                loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+                loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+                else -> null
+            }
+            errorState?.error?.let { throwable ->
+                cookViewModel.handlePagingSourceError(throwable)
+            }
+        }
     }
 
     override fun onDestroyView() {

@@ -23,7 +23,11 @@
         android:id="@+id/fragment_cook"
         android:name="com.example.afreecaandroid.ui.view.cook.CookFragment"
         android:label="CookFragment"
-        tools:layout="@layout/fragment_cook"/>
+        tools:layout="@layout/fragment_cook">
+        <action
+            android:id="@+id/action_fragment_cook_to_cookDetailFragment"
+            app:destination="@id/cookDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_travel"
         android:name="com.example.afreecaandroid.ui.view.travel.TravelFragment"
@@ -38,4 +42,9 @@
         android:name="com.example.afreecaandroid.ui.view.travel.TravelFragmentDetail"
         android:label="TravelFragmentDetail"
         tools:layout="@layout/fragment_travel_detail"/>
+    <fragment
+        android:id="@+id/cookDetailFragment"
+        android:name="com.example.afreecaandroid.ui.view.cook.CookDetailFragment"
+        android:label="CookDetailFragment"
+        tools:layout="@layout/fragment_cook_detail"/>
 </navigation>

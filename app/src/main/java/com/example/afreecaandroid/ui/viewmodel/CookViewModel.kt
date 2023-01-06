@@ -28,7 +28,7 @@ class CookViewModel @Inject constructor(
     private val _cookBroadCastDetail = MutableStateFlow<UiState<UiData>>(UiState.Loading)
     val cookBroadCastDetail: StateFlow<UiState<UiData>> = _cookBroadCastDetail.asStateFlow()
 
-    fun getTalkCamBroadCastList() {
+    fun getCookBroadCastList() {
         viewModelScope.launch(Dispatchers.IO) {
             val categoryName = async {
                 cookRepository.getCategoryNum()
@@ -44,7 +44,7 @@ class CookViewModel @Inject constructor(
         }
     }
 
-    fun setTalkCamDetailData(uiData: UiData) {
+    fun setCookDetailData(uiData: UiData) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 _cookBroadCastDetail.value = UiState.Success(uiData)

@@ -1,4 +1,4 @@
-package com.example.afreecaandroid.ui.view
+package com.example.afreecaandroid.ui.view.talkcam
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.afreecaandroid.R
 import com.example.afreecaandroid.databinding.FragmentTalkCamDetailBinding
+import com.example.afreecaandroid.ui.view.MainActivity
 import com.example.afreecaandroid.ui.viewmodel.TalkCamViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

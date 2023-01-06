@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.afreecaandroid.databinding.ItemTalkCamBinding
+import com.example.afreecaandroid.databinding.ItemUiDataBinding
 import com.example.afreecaandroid.ui.model.UiData
 
 class UiDataPagingAdapter :
@@ -13,7 +13,7 @@ class UiDataPagingAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TalkCamViewHolder {
         return TalkCamViewHolder(
-            ItemTalkCamBinding.inflate(
+            ItemUiDataBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -37,7 +37,7 @@ class UiDataPagingAdapter :
     }
 
     class TalkCamViewHolder(
-        private val binding: ItemTalkCamBinding
+        private val binding: ItemUiDataBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(uiData: UiData) {
             binding.uiData = uiData

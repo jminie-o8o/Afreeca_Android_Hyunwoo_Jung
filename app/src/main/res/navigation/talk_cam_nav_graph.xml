@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_talk_cam"
-        android:name="com.example.afreecaandroid.ui.view.TalkCamFragment"
+        android:name="com.example.afreecaandroid.ui.view.talkcam.TalkCamFragment"
         android:label="TalkCamFragment"
         tools:layout="@layout/fragment_talk_cam">
         <action
@@ -16,17 +16,17 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_talk_cam_detail"
-        android:name="com.example.afreecaandroid.ui.view.TalkCamDetailFragment"
+        android:name="com.example.afreecaandroid.ui.view.talkcam.TalkCamDetailFragment"
         android:label="TalkCamDetailFragment"
         tools:layout="@layout/fragment_talk_cam_detail"/>
     <fragment
         android:id="@+id/fragment_cook"
-        android:name="com.example.afreecaandroid.ui.view.CookFragment"
+        android:name="com.example.afreecaandroid.ui.view.cook.CookFragment"
         android:label="CookFragment"
         tools:layout="@layout/fragment_cook"/>
     <fragment
         android:id="@+id/fragment_travel"
-        android:name="com.example.afreecaandroid.ui.view.TravelFragment"
+        android:name="com.example.afreecaandroid.ui.view.travel.TravelFragment"
         android:label="TravelFragment"
         tools:layout="@layout/fragment_travel">
         <action
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/travelFragmentDetail"
-        android:name="com.example.afreecaandroid.ui.view.TravelFragmentDetail"
+        android:name="com.example.afreecaandroid.ui.view.travel.TravelFragmentDetail"
         android:label="TravelFragmentDetail"
         tools:layout="@layout/fragment_travel_detail"/>
 </navigation>

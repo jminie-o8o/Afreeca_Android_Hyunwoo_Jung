@@ -1,4 +1,4 @@
-package com.example.afreecaandroid.ui.view
+package com.example.afreecaandroid.ui.view.talkcam
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,27 +13,28 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.afreecaandroid.R
-import com.example.afreecaandroid.databinding.FragmentTravelBinding
+import com.example.afreecaandroid.databinding.FragmentTalkCamBinding
 import com.example.afreecaandroid.ui.adapter.UiDataPagingAdapter
-import com.example.afreecaandroid.ui.viewmodel.TravelViewModel
+import com.example.afreecaandroid.ui.view.MainActivity
+import com.example.afreecaandroid.ui.viewmodel.TalkCamViewModel
 import com.example.afreecaandroid.uitl.UiState
 import com.example.afreecaandroid.uitl.collectLatestStateFlow
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TravelFragment : Fragment() {
+class TalkCamFragment : Fragment() {
 
-    private var _binding: FragmentTravelBinding? = null
+    private var _binding: FragmentTalkCamBinding? = null
     private val binding get() = _binding!!
-    private val travelViewModel: TravelViewModel by activityViewModels()
+    private val talkCamViewModel: TalkCamViewModel by activityViewModels()
     private lateinit var uiDataPagingAdapter: UiDataPagingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_travel, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_talk_cam, container, false)
         return binding.root
     }
 
@@ -42,14 +43,14 @@ class TravelFragment : Fragment() {
         uiDataPagingAdapter = UiDataPagingAdapter()
         setupRecyclerView(uiDataPagingAdapter)
         setTalkCamDataByUiState()
-        getTalkCamData()
         showListEmptyText()
+        getTalkCamData()
         setClickListenerFromAdapter(uiDataPagingAdapter)
         showBottomNavigation()
     }
 
     private fun setupRecyclerView(uiDataPagingAdapter: UiDataPagingAdapter) {
-        binding.rvTravel.apply {
+        binding.rvTalkCam.apply {
             adapter = uiDataPagingAdapter
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -63,27 +64,27 @@ class TravelFragment : Fragment() {
     }
 
     private fun setTalkCamDataByUiState() {
-        collectLatestStateFlow(travelViewModel.travelBroadCastList) { uiState ->
+        collectLatestStateFlow(talkCamViewModel.talkCamBroadCastList) { uiState ->
             when(uiState) {
                 is UiState.Loading -> {
                     with(binding) {
-                        progressBarTravel.isVisible = true
-                        tvEmptylistTravel.isVisible = false
-                        rvTravel.isVisible = false
+                        progressBar.isVisible = true
+                        tvEmptylist.isVisible = false
+                        rvTalkCam.isVisible = false
                     }
                 }
                 is UiState.Error -> {
                     with(binding) {
-                        progressBarTravel.isVisible = false
-                        tvEmptylistTravel.isVisible = true
-                        rvTravel.isVisible = false
+                        progressBar.isVisible = false
+                        tvEmptylist.isVisible = true
+                        rvTalkCam.isVisible = false
                     }
                 }
                 is UiState.Success -> {
                     with(binding) {
-                        progressBarTravel.isVisible = false
-                        tvEmptylistTravel.isVisible = false
-                        rvTravel.isVisible = true
+                        progressBar.isVisible = false
+                        tvEmptylist.isVisible = false
+                        rvTalkCam.isVisible = true
                     }
                     uiDataPagingAdapter.submitData(uiState.data)
                 }
@@ -92,7 +93,7 @@ class TravelFragment : Fragment() {
     }
 
     private fun getTalkCamData() {
-        travelViewModel.getTravelBroadCastList()
+        talkCamViewModel.getTalkCamBroadCastList()
     }
 
     private fun showListEmptyText() {
@@ -102,14 +103,14 @@ class TravelFragment : Fragment() {
                     && loadState.refresh is LoadState.NotLoading
                     && loadState.append.endOfPaginationReached
 
-            binding.tvEmptylistTravel.isVisible = isListEmpty
+            binding.tvEmptylist.isVisible = isListEmpty
         }
     }
 
     private fun setClickListenerFromAdapter(uiDataPagingAdapter: UiDataPagingAdapter) {
         uiDataPagingAdapter.setOnItemClickListener { uiData ->
-            travelViewModel.setTravelDetailData(uiData)
-            val actions = TravelFragmentDirections.actionFragmentTravelToTravelFragmentDetail()
+            talkCamViewModel.setTalkCamDetailData(uiData)
+            val actions = TalkCamFragmentDirections.actionFragmentTalkCamToFragmentTalkCamDetail()
             findNavController().navigate(actions)
         }
     }

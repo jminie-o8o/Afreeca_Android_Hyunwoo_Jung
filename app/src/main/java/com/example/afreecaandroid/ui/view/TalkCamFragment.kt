@@ -107,8 +107,8 @@ class TalkCamFragment : Fragment() {
     }
 
     private fun setClickListenerFromAdapter(uiDataPagingAdapter: UiDataPagingAdapter) {
-        uiDataPagingAdapter.setOnItemClickListener { talkCamData ->
-            talkCamViewModel.setTalkCamDetailData(talkCamData)
+        uiDataPagingAdapter.setOnItemClickListener { uiData ->
+            talkCamViewModel.setTalkCamDetailData(uiData)
             val actions = TalkCamFragmentDirections.actionFragmentTalkCamToFragmentTalkCamDetail()
             findNavController().navigate(actions)
         }

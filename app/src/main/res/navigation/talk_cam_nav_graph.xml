@@ -28,5 +28,14 @@
         android:id="@+id/fragment_travel"
         android:name="com.example.afreecaandroid.ui.view.TravelFragment"
         android:label="TravelFragment"
-        tools:layout="@layout/fragment_travel"/>
+        tools:layout="@layout/fragment_travel">
+        <action
+            android:id="@+id/action_fragment_travel_to_travelFragmentDetail"
+            app:destination="@id/travelFragmentDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/travelFragmentDetail"
+        android:name="com.example.afreecaandroid.ui.view.TravelFragmentDetail"
+        android:label="TravelFragmentDetail"
+        tools:layout="@layout/fragment_travel_detail"/>
 </navigation>

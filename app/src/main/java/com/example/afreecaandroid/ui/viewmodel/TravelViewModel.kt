@@ -25,6 +25,9 @@ class TravelViewModel @Inject constructor(
     private val _travelBroadCastList = MutableStateFlow<UiState<PagingData<UiData>>>(UiState.Loading)
     val travelBroadCastList: StateFlow<UiState<PagingData<UiData>>> = _travelBroadCastList.asStateFlow()
 
+    private val _travelBroadCastDetail = MutableStateFlow<UiState<UiData>>(UiState.Loading)
+    val travelBroadCastDetail: StateFlow<UiState<UiData>> = _travelBroadCastDetail.asStateFlow()
+
     fun getTravelBroadCastList() {
         viewModelScope.launch(Dispatchers.IO) {
             val categoryName = async {
@@ -38,6 +41,17 @@ class TravelViewModel @Inject constructor(
                 .collect {
                     _travelBroadCastList.value = UiState.Success(it)
                 }
+        }
+    }
+
+    fun setTravelDetailData(uiData: UiData) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                _travelBroadCastDetail.value = UiState.Success(uiData)
+            } catch (e: Exception) {
+                _travelBroadCastDetail.value = UiState.Error
+                throw e
+            }
         }
     }
 }

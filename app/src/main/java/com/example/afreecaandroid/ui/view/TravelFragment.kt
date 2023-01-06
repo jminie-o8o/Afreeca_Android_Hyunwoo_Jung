@@ -8,13 +8,13 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.afreecaandroid.R
 import com.example.afreecaandroid.databinding.FragmentTravelBinding
 import com.example.afreecaandroid.ui.adapter.UiDataPagingAdapter
-import com.example.afreecaandroid.ui.viewmodel.TalkCamViewModel
 import com.example.afreecaandroid.ui.viewmodel.TravelViewModel
 import com.example.afreecaandroid.uitl.UiState
 import com.example.afreecaandroid.uitl.collectLatestStateFlow
@@ -44,6 +44,7 @@ class TravelFragment : Fragment() {
         setTalkCamDataByUiState()
         getTalkCamData()
         showListEmptyText()
+        setClickListenerFromAdapter(uiDataPagingAdapter)
         showBottomNavigation()
     }
 
@@ -102,6 +103,14 @@ class TravelFragment : Fragment() {
                     && loadState.append.endOfPaginationReached
 
             binding.tvEmptylistTravel.isVisible = isListEmpty
+        }
+    }
+
+    private fun setClickListenerFromAdapter(uiDataPagingAdapter: UiDataPagingAdapter) {
+        uiDataPagingAdapter.setOnItemClickListener { uiData ->
+            travelViewModel.setTravelDetailData(uiData)
+            val actions = TravelFragmentDirections.actionFragmentTravelToTravelFragmentDetail()
+            findNavController().navigate(actions)
         }
     }
 

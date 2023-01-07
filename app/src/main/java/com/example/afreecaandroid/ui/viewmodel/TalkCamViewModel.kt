@@ -43,7 +43,7 @@ class TalkCamViewModel @Inject constructor(
 
     fun getTalkCamBroadCastList() {
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
-            val categoryJob = launch {
+            val categoryJob = launch(Dispatchers.IO) {
                 talkCamRepository.getCategoryNum()
             }
             categoryJob.join()

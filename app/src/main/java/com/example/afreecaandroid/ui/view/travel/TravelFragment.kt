@@ -15,7 +15,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.afreecaandroid.R
 import com.example.afreecaandroid.databinding.FragmentTravelBinding
-import com.example.afreecaandroid.ui.adapter.UiDataPagingAdapter
+import com.example.afreecaandroid.ui.adapter.TalkCamPagingAdapter
+import com.example.afreecaandroid.ui.adapter.TravelPagingAdapter
 import com.example.afreecaandroid.ui.view.MainActivity
 import com.example.afreecaandroid.ui.viewmodel.TravelViewModel
 import com.example.afreecaandroid.uitl.UiState
@@ -29,7 +30,7 @@ class TravelFragment : Fragment() {
     private var _binding: FragmentTravelBinding? = null
     private val binding get() = _binding!!
     private val travelViewModel: TravelViewModel by activityViewModels()
-    private lateinit var uiDataPagingAdapter: UiDataPagingAdapter
+    private lateinit var travelPagingAdapter: TravelPagingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,20 +42,20 @@ class TravelFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        uiDataPagingAdapter = UiDataPagingAdapter()
-        setupRecyclerView(uiDataPagingAdapter)
+        travelPagingAdapter = TravelPagingAdapter()
+        setupRecyclerView(travelPagingAdapter)
         setTalkCamDataByUiState()
         getTalkCamData()
         showListEmptyText()
-        setClickListenerFromAdapter(uiDataPagingAdapter)
+        setClickListenerFromAdapter(travelPagingAdapter)
         showBottomNavigation()
-        handlePagingSourceError(uiDataPagingAdapter)
+        handlePagingSourceError(travelPagingAdapter)
         observeError()
     }
 
-    private fun setupRecyclerView(uiDataPagingAdapter: UiDataPagingAdapter) {
+    private fun setupRecyclerView(travelPagingAdapter: TravelPagingAdapter) {
         binding.rvTravel.apply {
-            adapter = uiDataPagingAdapter
+            adapter = travelPagingAdapter
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             addItemDecoration(
@@ -89,7 +90,7 @@ class TravelFragment : Fragment() {
                         tvEmptylistTravel.isVisible = false
                         rvTravel.isVisible = true
                     }
-                    uiDataPagingAdapter.submitData(uiState.data)
+                    travelPagingAdapter.submitData(uiState.data)
                 }
             }
         }
@@ -100,9 +101,9 @@ class TravelFragment : Fragment() {
     }
 
     private fun showListEmptyText() {
-        uiDataPagingAdapter.addLoadStateListener { combinedLoadStates ->
+        travelPagingAdapter.addLoadStateListener { combinedLoadStates ->
             val loadState = combinedLoadStates.source
-            val isListEmpty = uiDataPagingAdapter.itemCount < 1
+            val isListEmpty = travelPagingAdapter.itemCount < 1
                     && loadState.refresh is LoadState.NotLoading
                     && loadState.append.endOfPaginationReached
 
@@ -110,8 +111,8 @@ class TravelFragment : Fragment() {
         }
     }
 
-    private fun setClickListenerFromAdapter(uiDataPagingAdapter: UiDataPagingAdapter) {
-        uiDataPagingAdapter.setOnItemClickListener { uiData ->
+    private fun setClickListenerFromAdapter(travelPagingAdapter: TravelPagingAdapter) {
+        travelPagingAdapter.setOnItemClickListener { uiData ->
             travelViewModel.setTravelDetailData(uiData)
             val actions = TravelFragmentDirections.actionFragmentTravelToTravelFragmentDetail()
             findNavController().navigate(actions)
@@ -123,8 +124,8 @@ class TravelFragment : Fragment() {
         bottomNavigation.visibility = View.VISIBLE
     }
 
-    private fun handlePagingSourceError(uiDataPagingAdapter: UiDataPagingAdapter) {
-        uiDataPagingAdapter.addLoadStateListener { loadState ->
+    private fun handlePagingSourceError(travelPagingAdapter: TravelPagingAdapter) {
+        travelPagingAdapter.addLoadStateListener { loadState ->
             val errorState = when {
                 loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
                 loadState.append is LoadState.Error -> loadState.append as LoadState.Error

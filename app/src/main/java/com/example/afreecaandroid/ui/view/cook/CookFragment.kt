@@ -15,7 +15,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.afreecaandroid.R
 import com.example.afreecaandroid.databinding.FragmentCookBinding
-import com.example.afreecaandroid.ui.adapter.UiDataPagingAdapter
+import com.example.afreecaandroid.ui.adapter.CookPagingAdapter
+import com.example.afreecaandroid.ui.adapter.TalkCamPagingAdapter
 import com.example.afreecaandroid.ui.view.MainActivity
 import com.example.afreecaandroid.ui.viewmodel.CookViewModel
 import com.example.afreecaandroid.uitl.UiState
@@ -29,7 +30,7 @@ class CookFragment : Fragment() {
     private var _binding: FragmentCookBinding? = null
     private val binding get() = _binding!!
     private val cookViewModel: CookViewModel by activityViewModels()
-    private lateinit var uiDataPagingAdapter: UiDataPagingAdapter
+    private lateinit var cookPagingAdapter: CookPagingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,20 +42,20 @@ class CookFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        uiDataPagingAdapter = UiDataPagingAdapter()
-        setupRecyclerView(uiDataPagingAdapter)
+        cookPagingAdapter = CookPagingAdapter()
+        setupRecyclerView(cookPagingAdapter)
         setTalkCamDataByUiState()
         getTalkCamData()
         showListEmptyText()
-        setClickListenerFromAdapter(uiDataPagingAdapter)
+        setClickListenerFromAdapter(cookPagingAdapter)
         showBottomNavigation()
-        handlePagingSourceError(uiDataPagingAdapter)
+        handlePagingSourceError(cookPagingAdapter)
         observeError()
     }
 
-    private fun setupRecyclerView(uiDataPagingAdapter: UiDataPagingAdapter) {
+    private fun setupRecyclerView(cookPagingAdapter: CookPagingAdapter) {
         binding.rvCook.apply {
-            adapter = uiDataPagingAdapter
+            adapter = cookPagingAdapter
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             addItemDecoration(
@@ -89,16 +90,16 @@ class CookFragment : Fragment() {
                         tvEmptylistCook.isVisible = false
                         rvCook.isVisible = true
                     }
-                    uiDataPagingAdapter.submitData(uiState.data)
+                    cookPagingAdapter.submitData(uiState.data)
                 }
             }
         }
     }
 
     private fun showListEmptyText() {
-        uiDataPagingAdapter.addLoadStateListener { combinedLoadStates ->
+        cookPagingAdapter.addLoadStateListener { combinedLoadStates ->
             val loadState = combinedLoadStates.source
-            val isListEmpty = uiDataPagingAdapter.itemCount < 1
+            val isListEmpty = cookPagingAdapter.itemCount < 1
                     && loadState.refresh is LoadState.NotLoading
                     && loadState.append.endOfPaginationReached
 
@@ -106,8 +107,8 @@ class CookFragment : Fragment() {
         }
     }
 
-    private fun setClickListenerFromAdapter(uiDataPagingAdapter: UiDataPagingAdapter) {
-        uiDataPagingAdapter.setOnItemClickListener { uiData ->
+    private fun setClickListenerFromAdapter(cookPagingAdapter: CookPagingAdapter) {
+        cookPagingAdapter.setOnItemClickListener { uiData ->
             cookViewModel.setCookDetailData(uiData)
             val actions = CookFragmentDirections.actionFragmentCookToCookDetailFragment()
             findNavController().navigate(actions)
@@ -123,8 +124,8 @@ class CookFragment : Fragment() {
         cookViewModel.getCookBroadCastList()
     }
 
-    private fun handlePagingSourceError(uiDataPagingAdapter: UiDataPagingAdapter) {
-        uiDataPagingAdapter.addLoadStateListener { loadState ->
+    private fun handlePagingSourceError(cookPagingAdapter: CookPagingAdapter) {
+        cookPagingAdapter.addLoadStateListener { loadState ->
             val errorState = when {
                 loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
                 loadState.append is LoadState.Error -> loadState.append as LoadState.Error

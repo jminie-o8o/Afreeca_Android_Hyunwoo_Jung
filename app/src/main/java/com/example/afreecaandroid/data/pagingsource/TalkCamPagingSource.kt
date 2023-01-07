@@ -22,16 +22,15 @@ class TalkCamPagingSource(
                 broadList.broadCateNo == categoryNum
             }
 
-            val prevKey = if (pageNumber == STARTING_PAGE_INDEX) null else talkCamApiDTO.pageNo - 1
+            val prevKey = if (pageNumber == STARTING_PAGE_INDEX) null else pageNumber - 1
             val nextKey = if (checkEndOfPaginationReached(
                     talkCamApiDTO.pageNo,
-                    talkCamApiDTO.totalCnt,
-                    Constants.PAGE_BLOCK
+                    talkCamApiDTO.totalCnt
                 )
             ) {
                 null
             } else {
-                talkCamApiDTO.pageNo + 1
+                pageNumber + 1
             }
             LoadResult.Page(
                 data = talkCamList,
@@ -57,11 +56,10 @@ class TalkCamPagingSource(
     // 추가 - Response 를 확인하니 pageNo 가 항상 0으로 넘어오는데 실제로는 60개가 넘어오므로 pageBlock 60 으로 고정
     private fun checkEndOfPaginationReached(
         pageNumber: Int,
-        totalCount: Int,
-        pageBlock: Int
+        totalCount: Int
     ): Boolean {
-        val checkNum = totalCount / pageBlock
-        val formula = totalCount % pageBlock
+        val checkNum = totalCount / Constants.PAGE_BLOCK
+        val formula = totalCount % Constants.PAGE_BLOCK
         if (formula == 0) {
             if (pageNumber >= checkNum) return true
         } else {

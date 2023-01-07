@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.afreecaandroid.R
 import com.example.afreecaandroid.databinding.FragmentTalkCamBinding
-import com.example.afreecaandroid.ui.adapter.UiDataPagingAdapter
+import com.example.afreecaandroid.ui.adapter.TalkCamPagingAdapter
 import com.example.afreecaandroid.ui.view.MainActivity
 import com.example.afreecaandroid.ui.viewmodel.TalkCamViewModel
 import com.example.afreecaandroid.uitl.UiState
@@ -29,7 +29,7 @@ class TalkCamFragment : Fragment() {
     private var _binding: FragmentTalkCamBinding? = null
     private val binding get() = _binding!!
     private val talkCamViewModel: TalkCamViewModel by activityViewModels()
-    private lateinit var uiDataPagingAdapter: UiDataPagingAdapter
+    private lateinit var talkCamPagingAdapter: TalkCamPagingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,20 +41,20 @@ class TalkCamFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        uiDataPagingAdapter = UiDataPagingAdapter()
-        setupRecyclerView(uiDataPagingAdapter)
+        talkCamPagingAdapter = TalkCamPagingAdapter()
+        setupRecyclerView(talkCamPagingAdapter)
         setTalkCamDataByUiState()
         showListEmptyText()
         getTalkCamData()
-        setClickListenerFromAdapter(uiDataPagingAdapter)
+        setClickListenerFromAdapter(talkCamPagingAdapter)
         showBottomNavigation()
-        handlePagingSourceError(uiDataPagingAdapter)
+        handlePagingSourceError(talkCamPagingAdapter)
         observeError()
     }
 
-    private fun setupRecyclerView(uiDataPagingAdapter: UiDataPagingAdapter) {
+    private fun setupRecyclerView(talkCamPagingAdapter: TalkCamPagingAdapter) {
         binding.rvTalkCam.apply {
-            adapter = uiDataPagingAdapter
+            adapter = talkCamPagingAdapter
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             addItemDecoration(
@@ -89,7 +89,7 @@ class TalkCamFragment : Fragment() {
                         tvEmptylist.isVisible = false
                         rvTalkCam.isVisible = true
                     }
-                    uiDataPagingAdapter.submitData(uiState.data)
+                    talkCamPagingAdapter.submitData(uiState.data)
                 }
             }
         }
@@ -100,9 +100,9 @@ class TalkCamFragment : Fragment() {
     }
 
     private fun showListEmptyText() {
-        uiDataPagingAdapter.addLoadStateListener { combinedLoadStates ->
+        talkCamPagingAdapter.addLoadStateListener { combinedLoadStates ->
             val loadState = combinedLoadStates.source
-            val isListEmpty = uiDataPagingAdapter.itemCount < 1
+            val isListEmpty = talkCamPagingAdapter.itemCount < 1
                     && loadState.refresh is LoadState.NotLoading
                     && loadState.append.endOfPaginationReached
 
@@ -110,8 +110,8 @@ class TalkCamFragment : Fragment() {
         }
     }
 
-    private fun setClickListenerFromAdapter(uiDataPagingAdapter: UiDataPagingAdapter) {
-        uiDataPagingAdapter.setOnItemClickListener { uiData ->
+    private fun setClickListenerFromAdapter(talkCamPagingAdapter: TalkCamPagingAdapter) {
+        talkCamPagingAdapter.setOnItemClickListener { uiData ->
             talkCamViewModel.setTalkCamDetailData(uiData)
             val actions = TalkCamFragmentDirections.actionFragmentTalkCamToFragmentTalkCamDetail()
             findNavController().navigate(actions)
@@ -123,8 +123,8 @@ class TalkCamFragment : Fragment() {
         bottomNavigation.visibility = View.VISIBLE
     }
 
-    private fun handlePagingSourceError(uiDataPagingAdapter: UiDataPagingAdapter) {
-        uiDataPagingAdapter.addLoadStateListener { loadState ->
+    private fun handlePagingSourceError(talkCamPagingAdapter: TalkCamPagingAdapter) {
+        talkCamPagingAdapter.addLoadStateListener { loadState ->
             val errorState = when {
                 loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
                 loadState.append is LoadState.Error -> loadState.append as LoadState.Error

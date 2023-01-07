@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.afreecaandroid.databinding.ItemUiDataBinding
 import com.example.afreecaandroid.ui.model.UiData
 
-class UiDataPagingAdapter :
-    PagingDataAdapter<UiData, UiDataPagingAdapter.TalkCamViewHolder>(TalkCamDiffCallback) {
+class CookPagingAdapter :
+    PagingDataAdapter<UiData, CookPagingAdapter.CookViewHolder>(CookDiffCallback) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TalkCamViewHolder {
-        return TalkCamViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CookPagingAdapter.CookViewHolder {
+        return CookViewHolder(
             ItemUiDataBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -21,7 +21,7 @@ class UiDataPagingAdapter :
         )
     }
 
-    override fun onBindViewHolder(holder: TalkCamViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CookPagingAdapter.CookViewHolder, position: Int) {
         val talkCamData = getItem(position)
         talkCamData?.let { talkCamData ->
             holder.bind(talkCamData)
@@ -36,7 +36,7 @@ class UiDataPagingAdapter :
         onItemClickListener = listener
     }
 
-    class TalkCamViewHolder(
+    class CookViewHolder(
         private val binding: ItemUiDataBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(uiData: UiData) {
@@ -45,9 +45,9 @@ class UiDataPagingAdapter :
     }
 }
 
-object TalkCamDiffCallback : DiffUtil.ItemCallback<UiData>() {
+object CookDiffCallback : DiffUtil.ItemCallback<UiData>() {
     override fun areItemsTheSame(oldItem: UiData, newItem: UiData): Boolean {
-        return oldItem.hashCode() == newItem.hashCode()
+        return oldItem.userId == newItem.userId
     }
 
     override fun areContentsTheSame(oldItem: UiData, newItem: UiData): Boolean {

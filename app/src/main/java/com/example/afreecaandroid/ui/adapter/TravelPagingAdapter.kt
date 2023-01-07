@@ -22,11 +22,11 @@ class TravelPagingAdapter :
     }
 
     override fun onBindViewHolder(holder: TravelViewHolder, position: Int) {
-        val talkCamData = getItem(position)
-        talkCamData?.let { talkCamData ->
-            holder.bind(talkCamData)
+        val uiDataItem = getItem(position)
+        uiDataItem?.let { uiData ->
+            holder.bind(uiData)
             holder.itemView.setOnClickListener {
-                onItemClickListener?.let { it(talkCamData) }
+                onItemClickListener?.let { it(uiData) }
             }
         }
     }

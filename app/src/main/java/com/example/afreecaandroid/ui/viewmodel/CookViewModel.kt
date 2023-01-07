@@ -41,7 +41,11 @@ class CookViewModel @Inject constructor(
         }
     }
 
-    fun getCookBroadCastList() {
+    init {
+        getCookBroadCastList()
+    }
+
+    private fun getCookBroadCastList() {
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
             cookRepository.getCookBroadCastList()
                 .cachedIn(viewModelScope)

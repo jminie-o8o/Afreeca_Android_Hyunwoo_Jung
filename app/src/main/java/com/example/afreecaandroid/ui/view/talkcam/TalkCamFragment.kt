@@ -45,7 +45,6 @@ class TalkCamFragment : Fragment() {
         setupRecyclerView(talkCamPagingAdapter)
         setTalkCamDataByUiState()
         showListEmptyText()
-        getTalkCamData()
         setClickListenerFromAdapter(talkCamPagingAdapter)
         showBottomNavigation()
         handlePagingSourceError(talkCamPagingAdapter)
@@ -93,10 +92,6 @@ class TalkCamFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun getTalkCamData() {
-        talkCamViewModel.getTalkCamBroadCastList()
     }
 
     private fun showListEmptyText() {

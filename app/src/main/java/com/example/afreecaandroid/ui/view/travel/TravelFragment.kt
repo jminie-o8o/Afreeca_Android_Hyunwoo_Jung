@@ -45,7 +45,6 @@ class TravelFragment : Fragment() {
         travelPagingAdapter = TravelPagingAdapter()
         setupRecyclerView(travelPagingAdapter)
         setTalkCamDataByUiState()
-        getTalkCamData()
         showListEmptyText()
         setClickListenerFromAdapter(travelPagingAdapter)
         showBottomNavigation()
@@ -94,10 +93,6 @@ class TravelFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun getTalkCamData() {
-        travelViewModel.getTravelBroadCastList()
     }
 
     private fun showListEmptyText() {

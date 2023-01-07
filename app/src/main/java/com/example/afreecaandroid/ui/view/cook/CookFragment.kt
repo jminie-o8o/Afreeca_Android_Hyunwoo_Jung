@@ -45,7 +45,6 @@ class CookFragment : Fragment() {
         cookPagingAdapter = CookPagingAdapter()
         setupRecyclerView(cookPagingAdapter)
         setTalkCamDataByUiState()
-        getTalkCamData()
         showListEmptyText()
         setClickListenerFromAdapter(cookPagingAdapter)
         showBottomNavigation()
@@ -118,10 +117,6 @@ class CookFragment : Fragment() {
     private fun showBottomNavigation() {
         val bottomNavigation = (activity as MainActivity).findViewById<BottomNavigationView>(R.id.navigation_view)
         bottomNavigation.visibility = View.VISIBLE
-    }
-
-    private fun getTalkCamData() {
-        cookViewModel.getCookBroadCastList()
     }
 
     private fun handlePagingSourceError(cookPagingAdapter: CookPagingAdapter) {

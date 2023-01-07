@@ -41,7 +41,11 @@ class TravelViewModel @Inject constructor(
         }
     }
 
-    fun getTravelBroadCastList() {
+    init {
+        getTravelBroadCastList()
+    }
+
+    private fun getTravelBroadCastList() {
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
             travelRepository.getTalkCamBroadCastList()
                 .cachedIn(viewModelScope)

@@ -24,6 +24,101 @@
 ## 🕵 기술적 고민
 
 <details>
+<summary>API에서 가져오는 DTO와 UI에서 사용할 UiData 모델의 분리</summary>
+<div markdown="1">
+
+</br>
+
+- API에서 가져오는 데이터는 앱에서 실질적으로 사용되는 프로퍼티 외에 더 많은 데이터가 담겨있었습니다.
+- 이때 DTO의 모든 데이터를 앱에서 사용하는 모델이 다 가지고 있으면 불필요한 오류를 발생시킬 가능성도 있다고 생각했습니다.
+- 따라서 모델을 DTO, UiData 나누어 관리하였으며 Data Class 안의 정적함수에서 데이터 변환 로직을 구현하였습니다.
+
+</br>
+
+[ API에서 가져오는 DTO ]
+
+```kotlin
+data class DataSourceDTO(
+    @SerializedName("total_cnt")
+    val totalCnt: Int,
+    @SerializedName("page_block")
+    val pageBlock: Int,
+    @SerializedName("page_no")
+    val pageNo: Int,
+    @SerializedName("time")
+    val time: Int,
+    @SerializedName("broad")
+    val broad: List<Broad>
+)
+
+data class Broad(
+    @SerializedName("broad_bps")
+    val broadBps: String,
+    @SerializedName("broad_cate_no")
+    val broadCateNo: String,
+    @SerializedName("broad_grade")
+    val broadGrade: String,
+    @SerializedName("broad_no")
+    val broadNo: String,
+    @SerializedName("broad_resolution")
+    val broadResolution: String,
+    @SerializedName("broad_start")
+    val broadStart: String,
+    @SerializedName("broad_thumb")
+    val broadThumb: String,
+    @SerializedName("broad_title")
+    val broadTitle: String,
+    @SerializedName("is_password")
+    val isPassword: String,
+    @SerializedName("profile_img")
+    val profileImg: String,
+    @SerializedName("total_view_cnt")
+    val totalViewCnt: String,
+    @SerializedName("user_id")
+    val userId: String,
+    @SerializedName("user_nick")
+    val userNick: String,
+    @SerializedName("visit_broad_type")
+    val visitBroadType: String
+)
+```
+
+</br>
+
+[ 실제 앱에서 사용하는 UiData ]
+
+```kotlin
+data class UiData(
+    val userId: String,
+    val broadThumbnail: String,
+    val broadTitle: String,
+    val profileImage: String,
+    val totalViewCount: String
+)
+```
+
+</br>
+
+[ DTO 에서 받아온 데이터를 UI 에서 사용할 엔티티로 바꾸어 주는 함수 ]
+
+```kotlin
+// DTO 에서 받아온 데이터를 UI 에서 사용할 엔티티로 바꾸어 주는 함수
+fun toTalkCamDataFromApi(board: Broad) = UiData(
+    userId = board.userId,
+    broadThumbnail = board.broadThumb,
+    broadTitle = board.broadTitle,
+    profileImage = board.profileImg,
+    totalViewCount = board.totalViewCnt
+)
+```
+
+</br>
+
+
+</div>
+</details>
+
+<details>
 <summary>join() 함수를 이용한 동기처리 및 카테고리 정보를 싱글톤 세션 클래스에 저장</summary>
 <div markdown="1">
 

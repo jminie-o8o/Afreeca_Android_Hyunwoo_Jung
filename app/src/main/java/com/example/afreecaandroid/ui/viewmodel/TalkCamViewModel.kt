@@ -50,7 +50,7 @@ class TalkCamViewModel @Inject constructor(
             val categoryJob = launch(Dispatchers.IO) {
                 talkCamRepository.getCategoryNum()
             }
-            categoryJob.join()
+            categoryJob.join() // join 함수를 사용하여 카테고리 정보를 불러오는 정보를 먼저, 즉 동기적으로 수행
             talkCamRepository.getTalkCamBroadCastList()
                 .cachedIn(viewModelScope)
                 .catch { throwable->

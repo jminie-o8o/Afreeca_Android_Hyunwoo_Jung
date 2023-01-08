@@ -53,7 +53,7 @@ class TalkCamPagingSource(
     // 페이지 하나당 들어오는 개수인 pageBlock 을 나눈 몫에 1을 더하면 총 필요한 페이지 수가 된다.
     // 예를 들어 전체 데이터가 101개고 한번에 10개의 데이터가 들어온다면 필요한 페이지는 101 / 10 + 1 = 11페이지
     // 단 전체 데이터에서 페이지당 데이터를 나누었을 때 나머지가 0이라면 나눈 몫이 필요한 페이지다. 즉 1을 더할 필요 X
-    // 추가 - Response 를 확인하니 pageNo 가 항상 0으로 넘어오는데 실제로는 60개가 넘어오므로 pageBlock 60 으로 고정
+    // 추가 - Response 를 확인하니 pageBlock 가 항상 0으로 넘어오는데 실제로는 60개가 넘어오므로 pageBlock 60 으로 고정
     private fun checkEndOfPaginationReached(
         pageNumber: Int,
         totalCount: Int

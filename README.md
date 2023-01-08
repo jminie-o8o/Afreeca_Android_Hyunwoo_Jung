@@ -102,7 +102,7 @@ data class UiData(
 [ DTO 에서 받아온 데이터를 UI 에서 사용할 모델로 바꾸어 주는 함수 ]
 
 ```kotlin
-// DTO 에서 받아온 데이터를 UI 에서 사용할 엔티티로 바꾸어 주는 함수
+// DTO 에서 받아온 데이터를 UI 에서 사용할 모델로 바꾸어 주는 함수
 fun toUiDataFromDTO(board: Broad) = UiData(
     userId = board.userId,
     broadThumbnail = board.broadThumb,

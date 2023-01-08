@@ -20,6 +20,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import com.example.afreecaandroid.R
 import com.example.afreecaandroid.ui.adapter.TalkCamPagingAdapter
+import com.example.afreecaandroid.ui.adapter.TravelPagingAdapter
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
@@ -33,7 +34,7 @@ class MainActivityTest {
         // 1) 네트워크에서 데이터를 가져올 때 까지 일정시간 대기
         onView(isRoot()).perform(waitFor(3000))
 
-        // 2) ApiRecyclerView 에 표시되는 여부 확인
+        // 2) TalkCamRecyclerView 에 표시되는 여부 확인
         onView(withId(R.id.rv_talk_cam))
             .check(matches(isDisplayed()))
 
@@ -42,7 +43,7 @@ class MainActivityTest {
             .perform(actionOnItemAtPosition<TalkCamPagingAdapter.TalkCamViewHolder>(0, click()))
         onView(isRoot()).perform(waitFor(2000))
 
-        // 4) 토크 캠방 프로필 이미지가 정상적으로 뜨는지 확인
+        // 4) 토크 캠방 Bj 프로필 이미지가 정상적으로 뜨는지 확인
         onView(withId(R.id.iv_talk_cam_detail_bj_profile_image))
             .check(matches(isDisplayed()))
 
@@ -56,6 +57,42 @@ class MainActivityTest {
 
         // 7) 토크 캠방 썸네일 이미지가 정상적으로 뜨는지 확인
         onView(withId(R.id.iv_talk_cam_detail_thumb_nail))
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun travel_Ui_Test() {
+        // 1) 네트워크에서 데이터를 가져올 때 까지 일정시간 대기
+        onView(isRoot()).perform(waitFor(3000))
+
+        // 2) TravelFragment 로 이동
+        onView(withId(R.id.fragment_travel))
+            .perform(click())
+        onView(isRoot()).perform(waitFor(3000))
+
+        // 3) TravelRecyclerView 에 표시되는 여부 확인
+        onView(withId(R.id.rv_travel))
+            .check(matches(isDisplayed()))
+
+        // 4) 첫 번째 아이템 클릭
+        onView(withId(R.id.rv_travel))
+            .perform(actionOnItemAtPosition<TravelPagingAdapter.TravelViewHolder>(0, click()))
+        onView(isRoot()).perform(waitFor(2000))
+
+        // 5) 여행 프로필 이미지가 정상적으로 뜨는지 확인
+        onView(withId(R.id.iv_travel_detail_bj_profile_image))
+            .check(matches(isDisplayed()))
+
+        // 6) 여행 방송 제목이 정상적으로 뜨는지 확인
+        onView(withId(R.id.tv_travel_detail_broadcast_title))
+            .check(matches(isDisplayed()))
+
+        // 7) 여행 BJ 닉네임이 정상적으로 뜨는지 확인
+        onView(withId(R.id.tv_travel_detail_bj_nickname))
+            .check(matches(isDisplayed()))
+
+        // 8) 여행 썸네일 이미지가 정상적으로 뜨는지 확인
+        onView(withId(R.id.iv_travel_detail_thumb_nail))
             .check(matches(isDisplayed()))
     }
 

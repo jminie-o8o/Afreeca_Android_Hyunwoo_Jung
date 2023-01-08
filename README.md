@@ -232,6 +232,3 @@ private fun waitFor(delay: Long): ViewAction {
 <img width="572" alt="스크린샷 2022-12-01 오후 2 39 57" src="https://user-images.githubusercontent.com/79504043/211182583-722e8b98-d110-431d-9106-39539c0728ef.png">
 
 </br>
-</br>
-
-
